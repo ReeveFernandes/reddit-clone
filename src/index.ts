@@ -6,15 +6,15 @@ const main = async () => {
 	const orm = await MikroORM.init(mikroOrmConfig);
 	await orm.getMigrator().up();
 
-	// const post = orm.em.create(Post, {
-	// 	title: "Hello World",
-	// 	createdAt: new Date(),
-	// 	updatedAt: new Date()
-	// });
-	// await orm.em.persistAndFlush(post);
+	const post = orm.em.create(Post, {
+		title: "Hello World",
+		createdAt: new Date(),
+		updatedAt: new Date()
+	});
+	await orm.em.persistAndFlush(post);
 
-	const post = await orm.em.find(Post, {});
-	console.log(post);
+	const posts = await orm.em.find(Post, {});
+	console.log(posts);
 };
 
 main().catch((err) => {
