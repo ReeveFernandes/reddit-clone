@@ -9,6 +9,11 @@ import { HelloResolver } from "./resolvers/hello";
 import { PostResolver } from "./resolvers/post";
 import { UserResolver } from "./resolvers/user";
 
+/**
+ * @description Initiates a MikroORM database connection, runs migrations, creates
+ * an ApolloServer with schema and resolvers, starts the server, applies middleware,
+ * and persists a new post to the database.
+ */
 const main = async () => {
 	const orm = await MikroORM.init(mikroOrmConfig);
 	await orm.getMigrator().up();
@@ -27,6 +32,9 @@ const main = async () => {
 	apolloServer.applyMiddleware({ app } as { app: any });
 
 	app.listen(4000, () => {
+		// Runs when the server is started and logs the message "Server started on localhost:4000"
+		// to the console.
+
 		console.log("Server started on localhost:4000");
 	});
 
@@ -42,5 +50,7 @@ const main = async () => {
 };
 
 main().catch((err) => {
+	// Catches and logs any errors occurred during execution to the console.
+
 	console.error(err);
 });

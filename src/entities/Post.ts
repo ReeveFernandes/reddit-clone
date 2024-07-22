@@ -1,6 +1,10 @@
 import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
 import { Field, ObjectType, Int } from "type-graphql";
 
+/**
+ * @description Defines a data structure for storing information about posts, including
+ * their ID, creation and update dates, and title.
+ */
 @ObjectType()
 @Entity()
 export class Post {

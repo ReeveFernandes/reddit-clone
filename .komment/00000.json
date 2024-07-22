@@ -1,0 +1,813 @@
+[
+  {
+    "name": "Post.ts",
+    "path": "src/entities/Post.ts",
+    "content": {
+      "structured": {
+        "description": "An entity class `Post` for representing a post in a graphql database. The class has three properties: `id`, `createdAt`, and `updatedAt`, which are annotated with appropriate GraphQL types. Additionally, the `title` property is defined as a non-nullable string field. The `@Entity()` and `@ObjectType()` annotations indicate that this class represents a entity in the graphql database, and the `@PrimaryKey()` annotation specifies the `id` field as the primary key.",
+        "items": [
+          {
+            "id": "886675c8-847c-b087-ee4d-365a2e0baed8",
+            "ancestors": [],
+            "description": "Defines a data structure for storing information about posts, including their ID, creation and update dates, and title.",
+            "interfaces": [],
+            "superclass": null,
+            "is_abstract": false,
+            "fields": [
+              {
+                "name": "id",
+                "type_name": "number",
+                "description": "`@PrimaryKey()`, indicating that it is the primary key for the class, and is used to identify each post uniquely."
+              },
+              {
+                "name": "createdAt",
+                "type_name": "new_expression",
+                "description": "Set to a new Date() object every time the class is constructed, providing an automatically generated timestamp for when the post was created."
+              },
+              {
+                "name": "updatedAt",
+                "type_name": "new_expression",
+                "description": "Automatically updated to the current date upon every modification to the object, using the `onUpdate` property option."
+              },
+              {
+                "name": "title",
+                "type_name": "string",
+                "description": "Non-optional."
+              }
+            ],
+            "name": "Post",
+            "location": {
+              "start": 6,
+              "insert": 4,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 17,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "User.ts",
+    "path": "src/entities/User.ts",
+    "content": {
+      "structured": {
+        "description": "An entity class called `User` using the `@Entity()` and `@ObjectType()` decorators from `@mikro-orm/core`. The `User` class has three properties: `id`, `username`, and `password`. The `id` property is marked as a primary key using the `@PrimaryKey()` decorator, while the `createdAt` and `updatedAt` properties are marked as timestamps using the `@Field()` and `@Property()` decorators from `type-graphql`. The `username` property is marked as unique using the `@Property()` decorator.",
+        "items": [
+          {
+            "id": "2705967d-ff22-2fb6-7a4f-f784b54ced1d",
+            "ancestors": [],
+            "description": "Represents a user in a database, storing basic information such as ID, created and updated dates, username, and password.",
+            "interfaces": [],
+            "superclass": null,
+            "is_abstract": false,
+            "fields": [
+              {
+                "name": "id",
+                "type_name": "number",
+                "description": "Annotated with `@PrimaryKey()`, indicating that it is the primary key for the class, and `@Field()` to specify its name and data type."
+              },
+              {
+                "name": "createdAt",
+                "type_name": "new_expression",
+                "description": "Initialized to the current date and time at the moment the class is instantiated."
+              },
+              {
+                "name": "updatedAt",
+                "type_name": "new_expression",
+                "description": "Updated automatically by the framework at each modification of the object, with a default value of new Date() whenever it is accessed or modified."
+              },
+              {
+                "name": "username",
+                "type_name": "string",
+                "description": "Uniquely identified with a length limit of 50 words or less."
+              },
+              {
+                "name": "password",
+                "type_name": "string",
+                "description": "Marked as unique, indicating that it should be a distinct value for each user account."
+              }
+            ],
+            "name": "User",
+            "location": {
+              "start": 6,
+              "insert": 4,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 20,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Migration20240722191709.ts",
+    "path": "src/migrations/Migration20240722191709.ts",
+    "content": {
+      "structured": {
+        "description": "A migration class named Migration20240722191709, which performs database schema modifications for a user and post table. The up() method adds columns to the user table for \"created_at\" and \"updated_at\" timestamps, while also adding a unique constraint on the \"username\" column. Additionally, it modifies the post table's \"created_at\" column to use the timestamptz data type with a default value of 'now()', and adds a constraint to set the default value to a specific format. The down() method reverses these changes by dropping the user table and altering the post table's \"created_at\" column to use the timestamptz(6) data type with no default value.",
+        "items": [
+          {
+            "id": "8386a651-e14c-5093-5e4b-5301e75a7553",
+            "ancestors": [],
+            "description": "Updates a database by creating and modifying tables, adding constraints, and changing data types to ensure proper functionality.",
+            "interfaces": [],
+            "superclass": "Migration",
+            "is_abstract": false,
+            "fields": [],
+            "name": "Migration20240722191709",
+            "location": {
+              "start": 3,
+              "insert": 3,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 18,
+            "docLength": null
+          },
+          {
+            "id": "70439587-7dde-5ab3-f44c-f59550728b67",
+            "ancestors": [
+              "8386a651-e14c-5093-5e4b-5301e75a7553"
+            ],
+            "description": "Creates and modifies tables and columns in a database, including adding a unique constraint on the \"username\" column of the \"user\" table and altering the data types of the \"created_at\" column of both the \"post\" and \"user\" tables.",
+            "params": [],
+            "returns": {
+              "type_name": "Promise<void>",
+              "description": "A promise that resolves to no value."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "const userMigration = new Migration20240722191709();\nawait userMigration.up();\n",
+              "description": ""
+            },
+            "name": "up",
+            "location": {
+              "start": 5,
+              "insert": 5,
+              "offset": " ",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 7,
+            "docLength": null
+          },
+          {
+            "id": "99350924-0bf0-b2ab-a94c-eca2aa24ff4a",
+            "ancestors": [
+              "8386a651-e14c-5093-5e4b-5301e75a7553"
+            ],
+            "description": "Modifies two database tables: \"user\" and \"post\". The changes include dropping a default value from a column named \"created_at\" in the \"post\" table, and changing its data type to timestamp(6) using the existing value.",
+            "params": [],
+            "returns": {
+              "type_name": "Promise<void>",
+              "description": "A promise that resolves to no value."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "const migration = new Migration20240722191709();\nawait migration.down();\n",
+              "description": ""
+            },
+            "name": "down",
+            "location": {
+              "start": 13,
+              "insert": 13,
+              "offset": " ",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 6,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "post.ts",
+    "path": "src/resolvers/post.ts",
+    "content": {
+      "structured": {
+        "description": "A GraphQL resolver class for a Post entity. The resolvers handle queries to retrieve a list of posts, retrieve a single post by ID, create a new post, update an existing post, and delete a post. The code uses TypeGraphQL and MyContext packages to define the resolvers.",
+        "items": [
+          {
+            "id": "36bdceac-7ef1-5a81-db42-a1f6a194e9ed",
+            "ancestors": [],
+            "description": "Provides resolution for posts within a GraphQL schema, handling queries and mutations to retrieve or modify post data in a database.",
+            "interfaces": [],
+            "superclass": null,
+            "is_abstract": false,
+            "fields": [],
+            "name": "PostResolver",
+            "location": {
+              "start": 5,
+              "insert": 4,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 58,
+            "docLength": null
+          },
+          {
+            "id": "a6f2bf76-92b6-3dbf-2d42-ddb5f517deba",
+            "ancestors": [
+              "36bdceac-7ef1-5a81-db42-a1f6a194e9ed"
+            ],
+            "description": "Retrieves an array of `Post` objects from the database using the `find()` method of the entity manager (`em`).",
+            "params": [
+              {
+                "name": "obj",
+                "default_value": null,
+                "optional": false,
+                "type_name": "object",
+                "description": "Represented as `MyContext`."
+              },
+              {
+                "name": "obj.em",
+                "default_value": null,
+                "optional": false,
+                "type_name": "MyContext",
+                "description": "Used to represent the entity manager, which is responsible for managing data operations related to the Post entity."
+              }
+            ],
+            "returns": {
+              "type_name": "Promise<Post[]>",
+              "description": "An array of post objects."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "const posts = await postResolver.posts(); // fetch all posts\nconst post = await postResolver.post(1); // fetch a specific post with id 1\nconst newPost = await postResolver.createPost('Awesome Post'); // create a new post\nawait postResolver.updatePost(2, 'Updated Post Title'); // update a post's title with id 2\n",
+              "description": ""
+            },
+            "name": "posts",
+            "location": {
+              "start": 7,
+              "insert": 7,
+              "offset": "\t",
+              "indent": 1,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "a37c5140-3c63-c3b7-bc48-6eca679decdb",
+            "ancestors": [
+              "36bdceac-7ef1-5a81-db42-a1f6a194e9ed"
+            ],
+            "description": "Resolves a single post by ID from the `MyContext` object, using the `findOne()` method.",
+            "params": [
+              {
+                "name": "id",
+                "default_value": null,
+                "optional": false,
+                "type_name": "number",
+                "description": "Used to identify a specific post in the database to be retrieved."
+              },
+              {
+                "name": "obj",
+                "default_value": null,
+                "optional": false,
+                "type_name": "object",
+                "description": "Called 'em'."
+              },
+              {
+                "name": "obj.em",
+                "default_value": null,
+                "optional": false,
+                "type_name": "MyContext",
+                "description": "Used to access the context of the repository for querying data."
+              }
+            ],
+            "returns": {
+              "type_name": "Promise<Post | null>",
+              "description": "A promise that resolves to either a Post object or null."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "// Get all Posts\nconst posts = await postResolver.posts();\n\n// Get a single Post\nconst post = await postResolver.post(1);\n\n// Create a new Post\nconst newPost = await postResolver.createPost(\"New Post\");\n\n// Update an existing Post\nawait postResolver.updatePost(1, \"Updated Post Title\");\n",
+              "description": ""
+            },
+            "name": "post",
+            "location": {
+              "start": 12,
+              "insert": 12,
+              "offset": "\t",
+              "indent": 1,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 6,
+            "docLength": null
+          },
+          {
+            "id": "3b8081d5-8ca9-a6a1-b447-efa60d868aa2",
+            "ancestors": [
+              "36bdceac-7ef1-5a81-db42-a1f6a194e9ed"
+            ],
+            "description": "Creates a new post and persists it to the database, returning the created post object.",
+            "params": [
+              {
+                "name": "title",
+                "default_value": null,
+                "optional": false,
+                "type_name": "string",
+                "description": "Used to assign a title to the newly created post."
+              },
+              {
+                "name": "obj",
+                "default_value": null,
+                "optional": false,
+                "type_name": "object",
+                "description": "Passed as an instance of the class `MyContext`. The `MyContext` class has not been provided, so its \nfeatures are unknown."
+              },
+              {
+                "name": "obj.em",
+                "default_value": null,
+                "optional": false,
+                "type_name": "MyContext",
+                "description": "Used to represent the entity manager, which is an object that manages the persistence of data in the application."
+              }
+            ],
+            "returns": {
+              "type_name": "Promise<Post>",
+              "description": "A resolved promise containing a Post object."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "const post = await createPost(title);\n// Do something with the created post, e.g., send it to a server or store it locally.\n",
+              "description": ""
+            },
+            "name": "createPost",
+            "location": {
+              "start": 20,
+              "insert": 20,
+              "offset": "\t",
+              "indent": 1,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 12,
+            "docLength": null
+          },
+          {
+            "id": "9a1d215e-1f30-5492-e547-11707c0c2878",
+            "ancestors": [
+              "36bdceac-7ef1-5a81-db42-a1f6a194e9ed"
+            ],
+            "description": "Updates an existing post in a database, retrieving it first using the `em.findOne()` method, then updating its title (if provided) and persistently saving it to the database using `em.persistAndFlush()`.",
+            "params": [
+              {
+                "name": "id",
+                "default_value": null,
+                "optional": false,
+                "type_name": "number",
+                "description": "Used to identify the post to be updated."
+              },
+              {
+                "name": "title",
+                "default_value": null,
+                "optional": false,
+                "type_name": "string",
+                "description": "Used to update the title of a post if it is present, otherwise it will be `null`."
+              },
+              {
+                "name": "obj",
+                "default_value": null,
+                "optional": false,
+                "type_name": "object",
+                "description": "Called `MyContext`. This context contains an EntityManager (EM) that allows for the persistence and flushing of data to the database when updates are made."
+              },
+              {
+                "name": "obj.em",
+                "default_value": null,
+                "optional": false,
+                "type_name": "MyContext",
+                "description": "Used to access the entity manager for performing CRUD operations on the `Post` entity."
+              }
+            ],
+            "returns": {
+              "type_name": "Promise<Post | null>",
+              "description": "Either a Post object or null."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "const result = await PostResolver.updatePost(1, \"New Title\");\n",
+              "description": "\nThis will update a post with id of 1 to have the new title \"New Title\". If no post with id 1 exists, it will return null."
+            },
+            "name": "updatePost",
+            "location": {
+              "start": 34,
+              "insert": 34,
+              "offset": "\t",
+              "indent": 1,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 15,
+            "docLength": null
+          },
+          {
+            "id": "5d12b326-d15f-7dbd-2542-276a9d005e65",
+            "ancestors": [
+              "36bdceac-7ef1-5a81-db42-a1f6a194e9ed"
+            ],
+            "description": "Deletes a post with the specified ID using the `nativeDelete` method of the context's repository.",
+            "params": [
+              {
+                "name": "id",
+                "default_value": null,
+                "optional": false,
+                "type_name": "number",
+                "description": "Used to identify the post to be deleted."
+              },
+              {
+                "name": "obj",
+                "default_value": null,
+                "optional": false,
+                "type_name": "object",
+                "description": "From the context, which means it is a dependency injection container used to resolve dependencies for the function."
+              },
+              {
+                "name": "obj.em",
+                "default_value": null,
+                "optional": false,
+                "type_name": "MyContext",
+                "description": "Used to access the database context for executing the native delete operation."
+              }
+            ],
+            "returns": {
+              "type_name": "Promise<boolean>",
+              "description": "True if the post was successfully deleted and false otherwise."
+            },
+            "usage": null,
+            "name": "deletePost",
+            "location": {
+              "start": 51,
+              "insert": 51,
+              "offset": "\t",
+              "indent": 1,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 11,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "user.ts",
+    "path": "src/resolvers/user.ts",
+    "content": {
+      "structured": {
+        "description": "A GraphQL server with a `register` and `login` mutation. The `register` mutation takes a username and password input and creates a new user in the database if the input is valid. The `login` mutation takes a username and password input and verifies the provided password against the stored password for that username, returning the user object if the verification succeeds. Both mutations use the `argon2` package for password hashing and verification.",
+        "items": [
+          {
+            "id": "d6893ca9-f780-19af-184f-177733841a49",
+            "ancestors": [],
+            "description": "Provides a form for users to enter their username and password securely.",
+            "interfaces": [],
+            "superclass": null,
+            "is_abstract": false,
+            "fields": [
+              {
+                "name": "username",
+                "type_name": "string",
+                "description": "Used to store the user's username for authentication purposes."
+              },
+              {
+                "name": "password",
+                "type_name": "string",
+                "description": "Required, meaning it must be provided when creating a new instance of the class."
+              }
+            ],
+            "name": "UsernamePasswordInput",
+            "location": {
+              "start": 14,
+              "insert": 14,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 7,
+            "docLength": null
+          },
+          {
+            "id": "282fe81f-5f0f-53ac-e043-99bcd95967f9",
+            "ancestors": [],
+            "description": "Holds information about a field-related error, including the field name and error message.",
+            "interfaces": [],
+            "superclass": null,
+            "is_abstract": false,
+            "fields": [
+              {
+                "name": "field",
+                "type_name": "string",
+                "description": "13 characters long."
+              },
+              {
+                "name": "message",
+                "type_name": "string",
+                "description": "Used to describe the error message associated with the field that caused the error."
+              }
+            ],
+            "name": "FieldError",
+            "location": {
+              "start": 22,
+              "insert": 22,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 7,
+            "docLength": null
+          },
+          {
+            "id": "0c32113d-3f8b-64b6-f343-c074de0bf03c",
+            "ancestors": [],
+            "description": "Represents a response to a user's input, containing information about any errors that occurred during processing and the user object itself.",
+            "interfaces": [],
+            "superclass": null,
+            "is_abstract": false,
+            "fields": [
+              {
+                "name": "errors",
+                "type_name": "FieldError[]",
+                "description": "Nullable, indicating that it may be absent or contain zero or more FieldError objects representing validation errors occurred during data submission."
+              },
+              {
+                "name": "user",
+                "type_name": "User",
+                "description": "Nullable."
+              }
+            ],
+            "name": "UserResponse",
+            "location": {
+              "start": 30,
+              "insert": 30,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 8,
+            "docLength": null
+          },
+          {
+            "id": "0ab46bf0-bdba-6890-f64f-c4b5d0a18cef",
+            "ancestors": [],
+            "description": "Resolves user-related mutations by creating, updating, and authenticating users through their username and password.",
+            "interfaces": [],
+            "superclass": null,
+            "is_abstract": false,
+            "fields": [],
+            "name": "UserResolver",
+            "location": {
+              "start": 40,
+              "insert": 39,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 86,
+            "docLength": null
+          },
+          {
+            "id": "e660b0e6-d7db-80b3-a34d-0408cb3fc47a",
+            "ancestors": [
+              "0ab46bf0-bdba-6890-f64f-c4b5d0a18cef"
+            ],
+            "description": "Validates user input and creates a new user object in the database, persisting it and returning the created user object.",
+            "params": [
+              {
+                "name": "options",
+                "default_value": null,
+                "optional": false,
+                "type_name": "UsernamePasswordInput",
+                "description": "Used to validate user input for creating a new user account, specifically checking the length of the username and password fields."
+              },
+              {
+                "name": "obj",
+                "default_value": null,
+                "optional": false,
+                "type_name": "object",
+                "description": "Represented as an instance of `MyContext`. The context provides access to the entity manager for performing CRUD operations on the User entity."
+              },
+              {
+                "name": "obj.em",
+                "default_value": null,
+                "optional": false,
+                "type_name": "MyContext",
+                "description": "Used to persist and flush the newly created user to the database after creation."
+              }
+            ],
+            "returns": {
+              "type_name": "Promise<UserResponse>",
+              "description": "An object containing a single field called \"user\" that represents the registered user."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "const userInput = { username: \"johndoe\", password: \"123456789\" };\nconst userResolver = new UserResolver();\nconst result = await userResolver.register(userInput, ctx);\n",
+              "description": "\nThis is how a user would call the `register` method of the class with an input object containing the username and password as arguments. The `await` keyword indicates that this is an asynchronous operation."
+            },
+            "name": "register",
+            "location": {
+              "start": 42,
+              "insert": 42,
+              "offset": "\t",
+              "indent": 1,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 51,
+            "docLength": null
+          },
+          {
+            "id": "82b28037-9e1f-af88-b844-b28e7fe59c8b",
+            "ancestors": [
+              "0ab46bf0-bdba-6890-f64f-c4b5d0a18cef"
+            ],
+            "description": "Verifies the username and password provided by the client through the `options` argument, and returns the authenticated user if valid, or an error message otherwise.",
+            "params": [
+              {
+                "name": "options",
+                "default_value": null,
+                "optional": false,
+                "type_name": "UsernamePasswordInput",
+                "description": "Used to store user credentials for authentication purposes."
+              },
+              {
+                "name": "obj",
+                "default_value": null,
+                "optional": false,
+                "type_name": "object",
+                "description": "Represented by the variable `em`. It contains the MyContext object, which likely holds data related to authentication and user management."
+              },
+              {
+                "name": "obj.em",
+                "default_value": null,
+                "optional": false,
+                "type_name": "MyContext",
+                "description": "Used to access the database for querying user information."
+              }
+            ],
+            "returns": {
+              "type_name": "Promise<UserResponse>",
+              "description": "An object containing the user details if the login was successful or an error message if there was any issue with the login credentials."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "const user = await UserResolver.login(options);\nif (user) {\n   // do something with the user object\n} else {\n   // handle errors in the login response\n}\n",
+              "description": ""
+            },
+            "name": "login",
+            "location": {
+              "start": 95,
+              "insert": 95,
+              "offset": "\t",
+              "indent": 1,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 30,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "constants.ts",
+    "path": "src/constants.ts",
+    "content": {
+      "structured": {
+        "description": "An export const variable called `__prod__` and sets its value based on the `NODE_ENV` environment variable. Specifically, if `NODE_ENV` is set to \"production\", then `__prod__` is set to true, otherwise it is set to false. This code likely forms part of a larger application or module, and the export declaration indicates that the variable can be accessed from outside the current module.",
+        "items": []
+      }
+    }
+  },
+  {
+    "name": "index.ts",
+    "path": "src/index.ts",
+    "content": {
+      "structured": {
+        "description": "An express server with ApolloServer for graphQL and MikroORM for object-relational mapping. It initializes MikroORM, migrates the database, and creates resolvers for Hello, Post, and User. The code also sets up middleware for ApolloServer and starts the server on port 4000. Additionally, it creates a new Post entity and persists it to the database using MikroORM.",
+        "items": [
+          {
+            "id": "8a96e470-2cc0-e08e-0b4b-c4f225dad332",
+            "ancestors": [],
+            "description": "Initiates a MikroORM database connection, runs migrations, creates an ApolloServer with schema and resolvers, starts the server, applies middleware, and persists a new post to the database.",
+            "params": [],
+            "usage": {
+              "language": "typescript",
+              "code": "const app = await main();\napp.listen(4000);\n",
+              "description": ""
+            },
+            "name": "main",
+            "location": {
+              "start": 12,
+              "insert": 12,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 31,
+            "docLength": null
+          },
+          {
+            "id": "b7840016-6aa2-8dbd-664d-ad2844db70c6",
+            "ancestors": [
+              "8a96e470-2cc0-e08e-0b4b-c4f225dad332"
+            ],
+            "description": "Runs when the server is started and logs the message \"Server started on localhost:4000\" to the console.",
+            "name": null,
+            "location": {
+              "start": 29,
+              "insert": 30,
+              "offset": "\t",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "higher_order_invocation",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "d1c0df84-4b9d-6896-1748-2b44b8a9b51d",
+            "ancestors": [],
+            "description": "Catches and logs any errors occurred during execution to the console.",
+            "name": null,
+            "location": {
+              "start": 44,
+              "insert": 45,
+              "offset": "\t",
+              "indent": 1,
+              "comment": null
+            },
+            "item_type": "higher_order_invocation",
+            "length": 3,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "mikro-orm.config.ts",
+    "path": "src/mikro-orm.config.ts",
+    "content": {
+      "structured": {
+        "description": "An object that configures MikroORM, a popular ORM (Object-Relational Mapping) tool for PostgreSQL databases. The configuration includes specifying the database name, user name and password, port number, and debug mode. Additionally, it defines which entities to map, allows global context access, and sets the driver to use PostgreSqlDriver.",
+        "items": []
+      }
+    }
+  },
+  {
+    "name": "types.ts",
+    "path": "src/types.ts",
+    "content": {
+      "structured": {
+        "description": "An interface `MyContext` that provides access to an Entity Manager within a Mikro-ORM context. The Entity Manager is connected to a database driver through the `@mikro-orm/core` package.",
+        "items": [
+          {
+            "id": "3aec29d8-af49-3e82-2549-7ea70fed10ed",
+            "ancestors": [],
+            "description": "Declares a type that represents an object with an `em` property, which is of type `EntityManager`. An `EntityManager` is an abstraction that manages interactions with a database, and `IDatabaseDriver<Connection>` is a type parameter that represents the specific driver or adapter used to interact with the database. The `<Connection>` type parameter represents the connection to the database.",
+            "name": "MyContext",
+            "location": {
+              "start": 3,
+              "insert": 3,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "interface",
+            "length": 3,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  }
+]
