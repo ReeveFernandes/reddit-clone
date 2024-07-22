@@ -1,10 +1,11 @@
 {
   "meta": {
     "version": "1",
-    "updated_at": "2024-07-22T20:28:38.126Z",
+    "updated_at": "2024-07-22T20:40:56.434Z",
     "created_at": "2024-07-22T20:28:38.665Z",
     "pipelines": [
-      "a96ba84a-2585-4947-824b-885623ac5c92"
+      "a96ba84a-2585-4947-824b-885623ac5c92",
+      "7b163054-3289-4f30-805b-ed9b94029a6f"
     ]
   },
   "lookup": [
@@ -17,7 +18,8 @@
       "src/constants.ts",
       "src/index.ts",
       "src/mikro-orm.config.ts",
-      "src/types.ts"
+      "src/types.ts",
+      "src/resolvers/hello.ts"
     ]
   ]
 }

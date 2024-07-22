@@ -3,7 +3,7 @@ import { Field, ObjectType, Int } from "type-graphql";
 
 /**
  * @description Defines a data structure for storing information about posts, including
- * their ID, creation and update dates, and title.
+ * an ID, creation and update timestamps, and a title.
  */
 @ObjectType()
 @Entity()

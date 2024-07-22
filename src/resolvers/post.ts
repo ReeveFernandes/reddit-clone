@@ -2,22 +2,22 @@ import { Ctx, Query, Resolver, Mutation, Arg, Int } from "type-graphql";
 import { Post } from "../entities/Post";
 import { MyContext } from "../types";
 /**
- * @description Provides resolution for posts within a GraphQL schema, handling queries
- * and mutations to retrieve or modify post data in a database.
+ * @description Provides resolution functions for Post entities in a GraphQL schema,
+ * allowing for querying, creating, updating, and deleting posts.
  */
 @Resolver()
 export class PostResolver {
 	@Query(() => [Post])
 	/**
-	 * @description Retrieves an array of `Post` objects from the database using the
-	 * `find()` method of the entity manager (`em`).
+	 * @description Retrieves an array of `Post` objects from the database using the `em`
+	 * instance's `find()` method.
 	 * 
-	 * @param {object} obj - Represented as `MyContext`.
+	 * @param {object} obj - Used to represent an instance of the `MyContext` class, which
+	 * provides access to data stored in a database or other data storage system.
 	 * 
-	 * @param {MyContext} obj.em - Used to represent the entity manager, which is responsible
-	 * for managing data operations related to the Post entity.
+	 * @param {MyContext} obj.em - Used as the entity manager for querying posts.
 	 * 
-	 * @returns {Promise<Post[]>} An array of post objects.
+	 * @returns {Promise<Post[]>} An array of Post objects.
 	 */
 	posts(@Ctx() { em }: MyContext): Promise<Post[]> {
 		return em.find(Post, {});
@@ -25,15 +25,17 @@ export class PostResolver {
 
 	@Query(() => Post, { nullable: true })
 	/**
-	 * @description Resolves a single post by ID from the `MyContext` object, using the
-	 * `findOne()` method.
+	 * @description Retrieves a post from the database based on its ID using the
+	 * `em.findOne()` method.
 	 * 
-	 * @param {number} id - Used to identify a specific post in the database to be retrieved.
+	 * @param {number} id - Used to identify a specific post to be retrieved or created.
 	 * 
-	 * @param {object} obj - Called 'em'.
+	 * @param {object} obj - Referred to as `em`. This collection represents an instance
+	 * of `MyContext`.
 	 * 
-	 * @param {MyContext} obj.em - Used to access the context of the repository for
-	 * querying data.
+	 * @param {MyContext} obj.em - Used to represent the context of the application,
+	 * providing access to entities and their relationships within the application's
+	 * domain model.
 	 * 
 	 * @returns {Promise<Post | null>} A promise that resolves to either a Post object
 	 * or null.
@@ -47,19 +49,19 @@ export class PostResolver {
 
 	@Mutation(() => Post)
 	/**
-	 * @description Creates a new post and persists it to the database, returning the
-	 * created post object.
+	 * @description Creates a new post entity and persists it to the database, returning
+	 * the newly created post object.
 	 * 
-	 * @param {string} title - Used to assign a title to the newly created post.
+	 * @param {string} title - Used to set the title of a new post.
 	 * 
-	 * @param {object} obj - Passed as an instance of the class `MyContext`. The `MyContext`
-	 * class has not been provided, so its
-	 * features are unknown.
+	 * @param {object} obj - Represented by the abbreviation `em`. It provides access to
+	 * the entity manager, allowing for the creation and persistence of objects in the database.
 	 * 
-	 * @param {MyContext} obj.em - Used to represent the entity manager, which is an
-	 * object that manages the persistence of data in the application.
+	 * @param {MyContext} obj.em - Used to represent the entity manager that handles
+	 * creation and persistence of data objects, such as Posts, in this case.
 	 * 
-	 * @returns {Promise<Post>} A resolved promise containing a Post object.
+	 * @returns {Promise<Post>} A Post object containing the title, createdAt and updatedAt
+	 * fields.
 	 */
 	async createPost(
 		@Arg("title") title: string,
@@ -76,23 +78,21 @@ export class PostResolver {
 
 	@Mutation(() => Post, { nullable: true })
 	/**
-	 * @description Updates an existing post in a database, retrieving it first using the
-	 * `em.findOne()` method, then updating its title (if provided) and persistently
-	 * saving it to the database using `em.persistAndFlush()`.
+	 * @description Updates an existing post in a database, setting its title if provided,
+	 * and returning the updated post or null if the post does not exist.
 	 * 
 	 * @param {number} id - Used to identify the post to be updated.
 	 * 
-	 * @param {string} title - Used to update the title of a post if it is present,
-	 * otherwise it will be `null`.
+	 * @param {string} title - Nullable. It updates the title field of the post if provided,
+	 * otherwise leaves it unchanged.
 	 * 
-	 * @param {object} obj - Called `MyContext`. This context contains an EntityManager
-	 * (EM) that allows for the persistence and flushing of data to the database when
-	 * updates are made.
+	 * @param {object} obj - Referenced as `em`. It represents an instance of the `MyContext`
+	 * class, which provides a repository for managing posts in the application's database.
 	 * 
-	 * @param {MyContext} obj.em - Used to access the entity manager for performing CRUD
-	 * operations on the `Post` entity.
+	 * @param {MyContext} obj.em - Used to manage the persistence and flushing of updated
+	 * post data to the database.
 	 * 
-	 * @returns {Promise<Post | null>} Either a Post object or null.
+	 * @returns {Promise<Post | null>} A promise that resolves to a Post object or null.
 	 */
 	async updatePost(
 		@Arg("id") id: number,
@@ -112,18 +112,18 @@ export class PostResolver {
 
 	@Mutation(() => Boolean)
 	/**
-	 * @description Deletes a post with the specified ID using the `nativeDelete` method
-	 * of the context's repository.
+	 * @description Deletes a post with the given ID from the database using the
+	 * `nativeDelete()` method of the context object.
 	 * 
 	 * @param {number} id - Used to identify the post to be deleted.
 	 * 
-	 * @param {object} obj - From the context, which means it is a dependency injection
-	 * container used to resolve dependencies for the function.
+	 * @param {object} obj - Named 'em'. It is an instance of the MyContext class, which
+	 * provides access to the data layer for the application's data model.
 	 * 
-	 * @param {MyContext} obj.em - Used to access the database context for executing the
-	 * native delete operation.
+	 * @param {MyContext} obj.em - Used to provide access to the underlying database
+	 * context for deleting a post.
 	 * 
-	 * @returns {Promise<boolean>} True if the post was successfully deleted and false otherwise.
+	 * @returns {Promise<boolean>} 1 if the post was deleted successfully, and false otherwise.
 	 */
 	async deletePost(
 		@Arg("id") id: number,

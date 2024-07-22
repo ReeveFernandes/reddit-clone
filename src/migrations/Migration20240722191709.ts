@@ -1,19 +1,19 @@
 import { Migration } from '@mikro-orm/migrations';
 
 /**
- * @description Updates a database by creating and modifying tables, adding constraints,
- * and changing data types to ensure proper functionality.
+ * @description Modifies a database by creating and altering tables, adding constraints,
+ * and setting default values for columns.
  * 
  * @extends {Migration}
  */
 export class Migration20240722191709 extends Migration {
 
   /**
-   * @description Creates and modifies tables and columns in a database, including
-   * adding a unique constraint on the "username" column of the "user" table and altering
-   * the data types of the "created_at" column of both the "post" and "user" tables.
+   * @description Creates and modifies tables, adding columns and constraints, and
+   * updating data types and default values for the `post` table.
    * 
-   * @returns {Promise<void>} A promise that resolves to no value.
+   * @returns {Promise<void>} An object that represents a promise that will be resolved
+   * when the asynchronous operation is complete.
    */
   async up(): Promise<void> {
     this.addSql('create table "user" ("id" serial primary key, "created_at" timestamptz not null default \'now()\', "updated_at" timestamptz not null, "username" text not null, "password" text not null);');
@@ -24,9 +24,9 @@ export class Migration20240722191709 extends Migration {
   }
 
   /**
-   * @description Modifies two database tables: "user" and "post". The changes include
-   * dropping a default value from a column named "created_at" in the "post" table, and
-   * changing its data type to timestamp(6) using the existing value.
+   * @description Modifies two tables in a database: "user" and "post". The modifications
+   * include dropping the default value from the "created_at" column in the "post"
+   * table, and changing its data type to "timestamptz(6)".
    * 
    * @returns {Promise<void>} A promise that resolves to no value.
    */

@@ -2,8 +2,8 @@ import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
 import { Field, ObjectType, Int } from "type-graphql";
 
 /**
- * @description Represents a user in a database, storing basic information such as
- * ID, created and updated dates, username, and password.
+ * @description Defines a representation of a user in a system, with fields for ID,
+ * created and updated at timestamps, username, and password.
  */
 @ObjectType()
 @Entity()
