@@ -715,62 +715,40 @@
     "path": "src/index.ts",
     "content": {
       "structured": {
-        "description": "An express server using Apollo Server and MikroORM, a type-safe ORM for Node.js. The main function initializes MikroORM, migrates the database, creates an ApolloServer with schema built from resolvers, and starts the server. Additionally, it creates a Post entity and persists it to the database using MikroORM's `persistAndFlush()` method.",
+        "description": "An express server with apollo server and mikro orm. It initializes a MikroORM instance using the configuration file, migrates the database, builds the schema using GraphQL, creates an ApolloServer instance and applies middleware to the express app, and persists a post in the database using MikroORM.",
         "items": [
           {
-            "id": "20ed3d99-f935-789f-d94e-d36e7720d0d2",
-            "ancestors": [],
-            "description": "Sets up an instance of MikroORM and uses it to migrate the database, then creates an Apollo Server using the schema built with `buildSchema`. The server is started and middleware is applied to the express app. Finally, a post is created and persisted in the database using MikroORM.",
-            "params": [],
-            "usage": {
-              "language": "typescript",
-              "code": "main(); // Start the application\n",
-              "description": ""
-            },
-            "name": "main",
-            "location": {
-              "start": 12,
-              "insert": 12,
-              "offset": " ",
-              "indent": 0,
-              "comment": null
-            },
-            "item_type": "function",
-            "length": 31,
-            "docLength": null
-          },
-          {
-            "id": "83564471-ad04-dbbd-6a4b-0dd70625789a",
+            "id": "abb1e514-d2fb-5a80-9b4e-35ea62724bbc",
             "ancestors": [
-              "20ed3d99-f935-789f-d94e-d36e7720d0d2"
+              "58b808da-8f12-7a9b-714f-b7bc39cac9b0"
             ],
-            "description": "Starts an HTTP server listening at port 4000 and logs \"Server started on localhost:4000\" to the console when executed.",
+            "description": "Starts an HTTP server listening at port 4000 and logs the message \"Server started on localhost:4000\" to the console when executed.",
             "name": null,
             "location": {
-              "start": 29,
-              "insert": 30,
+              "start": 67,
+              "insert": 68,
               "offset": "\t",
               "indent": 2,
               "comment": null
             },
             "item_type": "higher_order_invocation",
-            "length": 3,
+            "length": 6,
             "docLength": null
           },
           {
-            "id": "49f3c257-8f57-9d8b-db47-eb4072e5b27c",
+            "id": "df3b84ed-9e0f-aab8-fc42-d86f0769b42d",
             "ancestors": [],
-            "description": "Logs any error parameters passed to it via console.error",
+            "description": "Logs any error parameters passed to it through the `console.error()` method.",
             "name": null,
             "location": {
-              "start": 44,
-              "insert": 45,
+              "start": 85,
+              "insert": 86,
               "offset": "\t",
               "indent": 1,
               "comment": null
             },
             "item_type": "higher_order_invocation",
-            "length": 3,
+            "length": 5,
             "docLength": null
           }
         ]
@@ -792,25 +770,8 @@
     "path": "src/types.ts",
     "content": {
       "structured": {
-        "description": "An interface `MyContext` that provides an entity manager for a database connection through the `@mikro-orm/core` package. The entity manager is of type `IDatabaseDriver<Connection>` and can be used for various database operations. The code also imports the necessary packages for this purpose.",
-        "items": [
-          {
-            "id": "b00a8503-0136-fbb4-0d4f-80d34f01b995",
-            "ancestors": [],
-            "description": "Declares a type that has an entity manager with an EntityManager<IDatabaseDriver<Connection>>. An Entity Manager is a fundamental part of any Object-Relational Mapping (ORM) tool, which allows developers to interact with databases using objects rather than writing SQL queries directly. The EntityManager manages the underlying database connection and provides methods for performing CRUD (Create, Read, Update, Delete) operations on data.\n\nThe `IDatabaseDriver<Connection>` type parameter is a generic type that represents the driver used to connect to the database. This allows the Entity Manager to work with different database drivers, such as MySQL, PostgreSQL, or Oracle. The `<Connection>` type parameter represents the connection to the database, which is passed to the EntityManager constructor.\n\nThe `MyContext` interface provides a way to access the Entity Manager and perform database operations in a more object-oriented and modular manner than using direct database queries.",
-            "name": "MyContext",
-            "location": {
-              "start": 3,
-              "insert": 3,
-              "offset": " ",
-              "indent": 0,
-              "comment": null
-            },
-            "item_type": "interface",
-            "length": 3,
-            "docLength": null
-          }
-        ]
+        "description": "An interface `MyContext` that provides access to an Entity Manager and Express Request and Response objects. The Entity Manager is a fundamental part of any Object-Relational Mapping (ORM) tool, allowing developers to interact with databases using objects rather than writing SQL queries directly. The `IDatabaseDriver<Connection>` type parameter represents the driver used to connect to the database, while the `<Connection>` type parameter represents the connection to the database. This code uses the `@mikro-orm/core` and `@express/node` packages.",
+        "items": []
       }
     }
   },

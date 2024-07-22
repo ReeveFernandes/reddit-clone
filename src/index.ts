@@ -65,6 +65,9 @@ const main = async () => {
 	apolloServer.applyMiddleware({ app } as { app: any });
 
 	app.listen(4000, () => {
+		// Starts an HTTP server listening at port 4000 and logs the message "Server started
+		// on localhost:4000" to the console when executed.
+
 		// Starts an HTTP server listening at port 4000 and logs "Server started on localhost:4000"
 		// to the console when executed.
 
@@ -83,6 +86,8 @@ const main = async () => {
 };
 
 main().catch((err) => {
+	// Logs any error parameters passed to it through the `console.error()` method.
+
 	// Logs any error parameters passed to it via console.error
 
 	console.error(err);
