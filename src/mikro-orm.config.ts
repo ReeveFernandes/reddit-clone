@@ -1,6 +1,7 @@
 import { __prod__ } from "./constants";
 import { PostgreSqlDriver } from "@mikro-orm/postgresql";
 import { Post } from "./entities/Post";
+import { User } from "./entities/User";
 import { MikroORM } from "@mikro-orm/core";
 import path from "path";
 
@@ -14,6 +15,6 @@ export default {
 	password: "postgres",
 	port: 5000,
 	debug: !__prod__,
-	entities: [Post],
+	entities: [Post, User],
 	allowGlobalContext: true
 } as Parameters<typeof MikroORM.init>[0];
