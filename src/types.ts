@@ -1,5 +1,6 @@
 import { Connection, EntityManager, IDatabaseDriver } from "@mikro-orm/core";
 import { Request, Response } from "express";
+import "express-session";
 
 /**
  * @description Declares a type that has an entity manager with an
@@ -23,4 +24,10 @@ export interface MyContext {
 	em: EntityManager<IDatabaseDriver<Connection>>;
 	req: Request;
 	res: Response;
+}
+
+declare module "express-session" {
+	interface Session {
+		userId: number;
+	}
 }

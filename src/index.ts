@@ -12,6 +12,7 @@ import session from "express-session";
 import RedisStore from "connect-redis";
 import { createClient } from "redis";
 import { __prod__ } from "./constants";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 
 /**
  * @description Sets up an instance of MikroORM and uses it to migrate the database,
@@ -43,7 +44,7 @@ const main = async () => {
 			store: redisStore,
 			resave: false, // required: force lightweight session keep alive (touch)
 			saveUninitialized: false, // recommended: only save session when data exists
-			secret: process.env.SESSION as string,
+			secret: "keyboard cat",
 			cookie: {
 				maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
 				httpOnly: true,
@@ -54,6 +55,11 @@ const main = async () => {
 	);
 
 	const apolloServer = new ApolloServer({
+		plugins: [
+			ApolloServerPluginLandingPageGraphQLPlayground({
+				// options
+			})
+		],
 		schema: await buildSchema({
 			resolvers: [HelloResolver, PostResolver, UserResolver],
 			validate: false
