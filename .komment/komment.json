@@ -1,13 +1,14 @@
 {
   "meta": {
     "version": "1",
-    "updated_at": "2024-07-23T17:03:38.061Z",
+    "updated_at": "2024-07-23T20:53:03.869Z",
     "created_at": "2024-07-22T20:28:38.665Z",
     "pipelines": [
       "a96ba84a-2585-4947-824b-885623ac5c92",
       "7b163054-3289-4f30-805b-ed9b94029a6f",
       "a326bf91-19e7-4b17-be70-ac4c3f8cbf93",
-      "18ddc502-ca41-4655-b63c-8394767ca53a"
+      "18ddc502-ca41-4655-b63c-8394767ca53a",
+      "c66afd04-747c-4d56-8977-e4d349a97212"
     ]
   },
   "lookup": [
@@ -21,7 +22,11 @@
       "src/index.ts",
       "src/mikro-orm.config.ts",
       "src/types.ts",
-      "src/resolvers/hello.ts"
+      "src/resolvers/hello.ts",
+      "web/codegen.ts",
+      "server/src/index.ts",
+      "web/src/pages/_app.tsx",
+      "web/src/pages/register.tsx"
     ]
   ]
 }

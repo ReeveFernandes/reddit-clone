@@ -687,5 +687,160 @@
         ]
       }
     }
+  },
+  {
+    "name": "codegen.ts",
+    "path": "web/codegen.ts",
+    "content": {
+      "structured": {
+        "description": "A configuration object for GraphQL CodeGen, a tool for generating GraphQL schema, queries, and mutations based on TypeScript definitions. The configuration specifies the following:\n\n* Overwrite existing files (default: true)\n* Schema URL: \"http://localhost:4000/graphql\"\n* Input files: \"src/graphql/**/*.graphql\"\n* Output directory: \"src/gql/\" with preset \"client\", plugins \"typescript\", \"typescript-operations\", and \"typescript-urql\".",
+        "items": []
+      }
+    }
+  },
+  {
+    "name": "index.ts",
+    "path": "server/src/index.ts",
+    "content": {
+      "structured": {
+        "description": "An express server using Apollo Server and MikroORM. The main function initializes MikroORM, migrates the database, creates an ApolloServer schema, starts the server, and persists a post in the database using MikroORM.",
+        "items": [
+          {
+            "id": "188283bb-8581-de86-af48-09fccb2d1c6e",
+            "ancestors": [
+              "319fdaf8-f428-d492-dd4e-ae3c9f5b158f"
+            ],
+            "description": "Starts a server listening on port 4000 and logs a message to the console when it starts.",
+            "name": null,
+            "location": {
+              "start": 76,
+              "insert": 77,
+              "offset": "\t",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "higher_order_invocation",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "1d752ae5-6d28-1bae-ff43-9d5393920a9a",
+            "ancestors": [],
+            "description": "Handles any type of error by logging it to console using `console.error()` method.",
+            "name": null,
+            "location": {
+              "start": 81,
+              "insert": 82,
+              "offset": "\t",
+              "indent": 1,
+              "comment": null
+            },
+            "item_type": "higher_order_invocation",
+            "length": 3,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "_app.tsx",
+    "path": "web/src/pages/_app.tsx",
+    "content": {
+      "structured": {
+        "description": "A component called `MyApp` that uses the `@chakra-ui/react` and `urql` libraries to create a GraphQL client and provide it as a provider to a React component. The `ChakraProvider` is used to apply a theme to the component, while the `Client` class is used to create a GraphQL client with two exchanges: `cacheExchange` and `fetchExchange`.",
+        "items": [
+          {
+            "id": "7c69a183-b742-e497-1748-8c68d8068866",
+            "ancestors": [],
+            "description": "Defines an React component that wraps another component with two providers: `ChakraProvider` and `Provider`. The `ChakraProvider` sets the theme for the component, while the `Provider` sets the client object for the component to use.",
+            "params": [
+              {
+                "name": "obj",
+                "default_value": null,
+                "optional": false,
+                "type_name": "object",
+                "description": "Passed as an argument to the `ChakraProvider`. The `Component` is the component that will be rendered, while the `pageProps` is an object that contains properties specific to the current page."
+              },
+              {
+                "name": "obj.Component",
+                "default_value": null,
+                "optional": false,
+                "type_name": "AppProps",
+                "description": "Passed as the first argument to the function, allowing for the wrapping of a React component with other props."
+              },
+              {
+                "name": "obj.pageProps",
+                "default_value": null,
+                "optional": false,
+                "type_name": "AppProps",
+                "description": "Passed to the `Component` component as an argument, providing additional props for the component to use."
+              }
+            ],
+            "returns": {
+              "type_name": "JSXElement",
+              "description": "A component that renders the specified `Component` with the provided `pageProps`."
+            },
+            "usage": null,
+            "name": "MyApp",
+            "location": {
+              "start": 12,
+              "insert": 12,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 9,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "register.tsx",
+    "path": "web/src/pages/register.tsx",
+    "content": {
+      "structured": {
+        "description": "A React component called `Register` that handles user registration through a Formik form. It utilizes the `@chakra-ui/react`, `urql`, and `Formik` libraries. The component renders a form with input fields for username and password, and a submit button to register the user upon form submission.",
+        "items": [
+          {
+            "id": "3b1aad1e-2c3d-af9c-724b-cf9faab6157d",
+            "ancestors": [],
+            "description": "Uses the `useMutation` hook to perform a server-side registered mutation with the `REGISTER_MUTATION` payload, passing the form values as arguments.",
+            "params": [
+              {
+                "name": "obj",
+                "default_value": null,
+                "optional": false,
+                "type_name": "object",
+                "description": "Passed as the second argument to the `useMutation` hook. It contains the props for the register form."
+              }
+            ],
+            "returns": {
+              "type_name": "React.FC<registerProps>",
+              "description": "A functional component that renders a form for registering a user."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "<Register />;\n",
+              "description": ""
+            },
+            "name": "Register",
+            "location": {
+              "start": 31,
+              "insert": 31,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 39,
+            "docLength": null
+          }
+        ]
+      }
+    }
   }
 ]
