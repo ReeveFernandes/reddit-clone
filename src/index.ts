@@ -12,6 +12,7 @@ import session from "express-session";
 import RedisStore from "connect-redis";
 import { createClient } from "redis";
 import { __prod__ } from "./constants";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 
 /**
  * @description Sets up an instance of MikroORM and uses it to migrate the database,
@@ -43,7 +44,7 @@ const main = async () => {
 			store: redisStore,
 			resave: false, // required: force lightweight session keep alive (touch)
 			saveUninitialized: false, // recommended: only save session when data exists
-			secret: process.env.SESSION as string,
+			secret: "keyboard cat",
 			cookie: {
 				maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
 				httpOnly: true,
@@ -54,6 +55,11 @@ const main = async () => {
 	);
 
 	const apolloServer = new ApolloServer({
+		plugins: [
+			ApolloServerPluginLandingPageGraphQLPlayground({
+				// options
+			})
+		],
 		schema: await buildSchema({
 			resolvers: [HelloResolver, PostResolver, UserResolver],
 			validate: false
@@ -65,8 +71,8 @@ const main = async () => {
 	apolloServer.applyMiddleware({ app } as { app: any });
 
 	app.listen(4000, () => {
-		// Starts an HTTP server listening at port 4000 and logs the message "Server started
-		// on localhost:4000" to the console when executed.
+		// Starts an HTTP server listening on port 4000 and logs "Server started on localhost:4000"
+		// to the console when executed.
 
 		// Starts an HTTP server listening at port 4000 and logs "Server started on localhost:4000"
 		// to the console when executed.
@@ -86,7 +92,7 @@ const main = async () => {
 };
 
 main().catch((err) => {
-	// Logs any error parameters passed to it through the `console.error()` method.
+	// Logs any errors passed to it via console.error
 
 	// Logs any error parameters passed to it via console.error
 

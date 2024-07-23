@@ -481,219 +481,56 @@
     "path": "src/resolvers/user.ts",
     "content": {
       "structured": {
-        "description": "A GraphQL resolver for a user registration and login mutation. The resolver uses the `argon2` library for password hashing and verification. The code creates a `User` entity with fields for username, password, createdAt, and updatedAt, and defines mutations to register and login a user using their username and password. The `login` mutation also validates the provided password against the stored password for the given username.",
+        "description": "GraphQL mutations and queries for a user authentication system using Argon2 password verification. The `UserResolver` class provides resolutions for user-related operations, including creating and updating user accounts, validating user input, and authenticating users through login and register functions. The `Login` function checks the provided username and password against an existing user record and verifies the password using Argon2, while the `Register` function creates a new user entity and persists it to the database upon successful validation.",
         "items": [
           {
-            "id": "b1c3c430-5564-7abf-da45-8fffcf125834",
-            "ancestors": [],
-            "description": "Provides a form for users to input their username and password for authentication purposes.",
-            "interfaces": [],
-            "superclass": null,
-            "is_abstract": false,
-            "fields": [
-              {
-                "name": "username",
-                "type_name": "string",
-                "description": "Mandatory, representing the user's username for authentication purposes."
-              },
-              {
-                "name": "password",
-                "type_name": "string",
-                "description": "Required, indicating that it is a mandatory field for the user to fill in when signing up or logging in."
-              }
-            ],
-            "name": "UsernamePasswordInput",
-            "location": {
-              "start": 14,
-              "insert": 14,
-              "offset": " ",
-              "indent": 0,
-              "comment": null
-            },
-            "item_type": "class",
-            "length": 7,
-            "docLength": null
-          },
-          {
-            "id": "255a4e73-3b7e-bc94-144d-22d9cb95a814",
-            "ancestors": [],
-            "description": "Centralizes error information related to fields within an object, providing a convenient means for storing and accessing field-specific error messages.",
-            "interfaces": [],
-            "superclass": null,
-            "is_abstract": false,
-            "fields": [
-              {
-                "name": "field",
-                "type_name": "string",
-                "description": "Used to store the name of the field that caused the error."
-              },
-              {
-                "name": "message",
-                "type_name": "string",
-                "description": "Used to provide a detailed error message for the corresponding field."
-              }
-            ],
-            "name": "FieldError",
-            "location": {
-              "start": 22,
-              "insert": 22,
-              "offset": " ",
-              "indent": 0,
-              "comment": null
-            },
-            "item_type": "class",
-            "length": 7,
-            "docLength": null
-          },
-          {
-            "id": "8588eafc-88e1-8ca0-5d40-55b742c6f77b",
-            "ancestors": [],
-            "description": "Represents a response to a user, containing information about any errors that occurred during processing and the user itself.",
-            "interfaces": [],
-            "superclass": null,
-            "is_abstract": false,
-            "fields": [
-              {
-                "name": "errors",
-                "type_name": "FieldError[]",
-                "description": "Nullable, indicating that it can be absent or contain a list of error messages related to the user response."
-              },
-              {
-                "name": "user",
-                "type_name": "User",
-                "description": "Nullable."
-              }
-            ],
-            "name": "UserResponse",
-            "location": {
-              "start": 30,
-              "insert": 30,
-              "offset": " ",
-              "indent": 0,
-              "comment": null
-            },
-            "item_type": "class",
-            "length": 8,
-            "docLength": null
-          },
-          {
-            "id": "2b50ffb6-a48d-0b87-b643-90d45789e895",
-            "ancestors": [],
-            "description": "Resolves user-related GraphQL mutations by creating and updating user objects in a database, verifying passwords, and returning the resolved user object.",
-            "interfaces": [],
-            "superclass": null,
-            "is_abstract": false,
-            "fields": [],
-            "name": "UserResolver",
-            "location": {
-              "start": 40,
-              "insert": 39,
-              "offset": " ",
-              "indent": 0,
-              "comment": null
-            },
-            "item_type": "class",
-            "length": 86,
-            "docLength": null
-          },
-          {
-            "id": "a94aa806-d80b-e2a2-0848-57e5c9338e8b",
+            "id": "511e70dd-f83d-b19e-f342-8ac11381ab67",
             "ancestors": [
-              "2b50ffb6-a48d-0b87-b643-90d45789e895"
+              "8fe55e03-a705-5487-cc44-c85209788051"
             ],
-            "description": "Validates user input, creates a new `User` entity, and persists it to the database upon successful validation.",
+            "description": "Retrieves a `User` entity based on the user ID stored in the session.",
             "params": [
-              {
-                "name": "options",
-                "default_value": null,
-                "optional": false,
-                "type_name": "UsernamePasswordInput",
-                "description": "Used to validate and create a new user account."
-              },
               {
                 "name": "obj",
                 "default_value": null,
                 "optional": false,
                 "type_name": "object",
-                "description": "Referred to as `em`. It is an instance of `MyContext`, which is likely a custom context class for managing data in your application."
+                "description": "Passed as an argument to the function. It contains two properties: `req` and `em`."
+              },
+              {
+                "name": "obj.req",
+                "default_value": null,
+                "optional": false,
+                "type_name": "MyContext",
+                "description": "Passed in from the parent component as a prop. It contains information about the current HTTP request, including the user's session ID."
               },
               {
                 "name": "obj.em",
                 "default_value": null,
                 "optional": false,
                 "type_name": "MyContext",
-                "description": "Used to manage the persistence of the created user instance through the `persistAndFlush()` method."
+                "description": "Used to access the Entity Manager (EM) for performing database operations."
               }
             ],
             "returns": {
-              "type_name": "Promise<UserResponse>",
-              "description": "An object containing the registered user."
+              "type_name": "User",
+              "description": "An instance of the class User."
             },
             "usage": {
               "language": "typescript",
-              "code": "const registerResult = await UserResolver.register({\n    username: \"myusername\",\n    password: \"mypassword\"\n}, {\n    em: new MyContext()\n});\n",
+              "code": "const user = await this.userResolver.me({ req, em });\nif (user) {\n\t// do something with the user\n} else {\n\t// handle empty user response\n}\n",
               "description": ""
             },
-            "name": "register",
+            "name": "me",
             "location": {
-              "start": 42,
-              "insert": 42,
+              "start": 59,
+              "insert": 59,
               "offset": "\t",
               "indent": 1,
               "comment": null
             },
             "item_type": "function",
-            "length": 51,
-            "docLength": null
-          },
-          {
-            "id": "63754862-ff9c-97bc-2d47-6292de7d20d9",
-            "ancestors": [
-              "2b50ffb6-a48d-0b87-b643-90d45789e895"
-            ],
-            "description": "Authenticates a user by checking if their username and password match an existing user record and verifying the password using the Argon2 library. If the credentials are valid, it returns the authenticated user object.",
-            "params": [
-              {
-                "name": "options",
-                "default_value": null,
-                "optional": false,
-                "type_name": "UsernamePasswordInput",
-                "description": "Used to hold user input for authentication, including the username and password."
-              },
-              {
-                "name": "obj",
-                "default_value": null,
-                "optional": false,
-                "type_name": "object",
-                "description": "Annotated with `@Ctx()`. This indicates that it represents an optional context object that can be used within the function to access data or services provided by the application's context."
-              },
-              {
-                "name": "obj.em",
-                "default_value": null,
-                "optional": false,
-                "type_name": "MyContext",
-                "description": "Used to access and manipulate data from the database."
-              }
-            ],
-            "returns": {
-              "type_name": "Promise<UserResponse>",
-              "description": "An object containing the authenticated user."
-            },
-            "usage": {
-              "language": "typescript",
-              "code": "const input = { username: 'john', password: 'secret' };\nconst result = await UserResolver.login(input);\n",
-              "description": ""
-            },
-            "name": "login",
-            "location": {
-              "start": 95,
-              "insert": 95,
-              "offset": "\t",
-              "indent": 1,
-              "comment": null
-            },
-            "item_type": "function",
-            "length": 30,
+            "length": 7,
             "docLength": null
           }
         ]
@@ -715,18 +552,18 @@
     "path": "src/index.ts",
     "content": {
       "structured": {
-        "description": "An express server with apollo server and mikro orm. It initializes a MikroORM instance using the configuration file, migrates the database, builds the schema using GraphQL, creates an ApolloServer instance and applies middleware to the express app, and persists a post in the database using MikroORM.",
+        "description": "An express server using MikroORM and Apollo Server to create a GraphQL API. The code initializes an instance of MikroORM, migrates the database, and creates an ApolloServer using the schema built with `buildSchema`. The server is started, middleware is applied to the express app, and a post is created and persisted in the database using MikroORM.",
         "items": [
           {
-            "id": "abb1e514-d2fb-5a80-9b4e-35ea62724bbc",
+            "id": "d4fd84c2-19cb-3681-1b4b-dc3ce70d7fe8",
             "ancestors": [
-              "58b808da-8f12-7a9b-714f-b7bc39cac9b0"
+              "48c93cd4-20eb-5ca2-7549-a2b9db419200"
             ],
-            "description": "Starts an HTTP server listening at port 4000 and logs the message \"Server started on localhost:4000\" to the console when executed.",
+            "description": "Starts an HTTP server listening on port 4000 and logs \"Server started on localhost:4000\" to the console when executed.",
             "name": null,
             "location": {
-              "start": 67,
-              "insert": 68,
+              "start": 73,
+              "insert": 74,
               "offset": "\t",
               "indent": 2,
               "comment": null
@@ -736,13 +573,13 @@
             "docLength": null
           },
           {
-            "id": "df3b84ed-9e0f-aab8-fc42-d86f0769b42d",
+            "id": "8a25a8be-9d62-e2a1-d343-fa318a4da12f",
             "ancestors": [],
-            "description": "Logs any error parameters passed to it through the `console.error()` method.",
+            "description": "Logs any errors passed to it via console.error",
             "name": null,
             "location": {
-              "start": 85,
-              "insert": 86,
+              "start": 91,
+              "insert": 92,
               "offset": "\t",
               "indent": 1,
               "comment": null
@@ -770,8 +607,25 @@
     "path": "src/types.ts",
     "content": {
       "structured": {
-        "description": "An interface `MyContext` that provides access to an Entity Manager and Express Request and Response objects. The Entity Manager is a fundamental part of any Object-Relational Mapping (ORM) tool, allowing developers to interact with databases using objects rather than writing SQL queries directly. The `IDatabaseDriver<Connection>` type parameter represents the driver used to connect to the database, while the `<Connection>` type parameter represents the connection to the database. This code uses the `@mikro-orm/core` and `@express/node` packages.",
-        "items": []
+        "description": "An interface `MyContext` that provides access to an Entity Manager and other Express-related objects, such as a Request and Response object. The Entity Manager is a fundamental part of any Object-Relational Mapping (ORM) tool, which allows developers to interact with databases using objects rather than writing SQL queries directly. Additionally, the code declares a type `IDatabaseDriver<Connection>` that represents the driver used to connect to the database, and imports the `express-session` package, which provides an interface for working with session data in Express applications.",
+        "items": [
+          {
+            "id": "11a2fcd5-be1a-ddb5-954f-2bc5a7986541",
+            "ancestors": [],
+            "description": "Defines a representation of a user session, including a unique identifier (‘userId’)",
+            "name": "Session",
+            "location": {
+              "start": 30,
+              "insert": 30,
+              "offset": "\t",
+              "indent": 1,
+              "comment": null
+            },
+            "item_type": "interface",
+            "length": 3,
+            "docLength": null
+          }
+        ]
       }
     }
   },
