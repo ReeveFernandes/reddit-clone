@@ -1,7 +1,6 @@
 import "reflect-metadata";
 import { MikroORM } from "@mikro-orm/core";
 import mikroOrmConfig from "./mikro-orm.config";
-// import { Post } from "./entities/Post";
 import express from "express";
 import { ApolloServer, ServerRegistration } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
@@ -27,6 +26,10 @@ const main = async () => {
 
 	const app = express();
 
+	// app.set("trust proxy", !__prod__);
+	// app.set("Access-Control-Allow-Origin", "http://localhost:3000");
+	// app.set("Access-Control-Allow-Credentials", true);
+
 	// Initialize client.
 	const redisClient = createClient();
 	redisClient.connect().catch(console.error);
@@ -35,10 +38,20 @@ const main = async () => {
 	const redisStore = new RedisStore({
 		client: redisClient,
 		prefix: "myapp:",
-		disableTouch: true
+		disableTouch: true,
+		disableTTL: true
 	});
 
-	app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+	// app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+
+	const corsOptions = {
+		origin: "http://localhost:3000",
+		credentials: true
+	};
+
+	app.use(cors(corsOptions));
+
+	// const corsOptions = { credentials: true, origin: "http://localhost:3000" };
 
 	// Initialize session storage.
 	app.use(
@@ -46,13 +59,14 @@ const main = async () => {
 			name: "qid",
 			store: redisStore,
 			resave: false, // required: force lightweight session keep alive (touch)
-			saveUninitialized: false, // recommended: only save session when data exists
+			saveUninitialized: true, // recommended: only save session when data exists
 			secret: "keyboard cat",
 			cookie: {
 				maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
-				httpOnly: true,
-				sameSite: "lax",
-				secure: __prod__
+				httpOnly: false,
+				sameSite: "lax", // csrf
+				secure: __prod__, // cookie only works in https,
+				priority: "high"
 			}
 		})
 	);
@@ -71,7 +85,10 @@ const main = async () => {
 	});
 
 	await apolloServer.start();
-	apolloServer.applyMiddleware({ app, cors: false } as ServerRegistration);
+	apolloServer.applyMiddleware({
+		app,
+		cors: false
+	} as ServerRegistration);
 
 	app.listen(4000, () => {
 		console.log("Server started on localhost:4000");

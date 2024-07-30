@@ -1,28 +1,21 @@
 import { Box, Button, Flex } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
+import { useMeQuery } from "../generated/graphql";
 
 interface NavBarProps {}
 
 export const NavBar: React.FC<NavBarProps> = ({}) => {
-	return (
-		<Flex
-			bg="tomato"
-			p={4}
-		>
-			<Box
-				bg="tomato"
-				w="100%"
-				p={4}
-				color="white"
-				ml={"auto"}
-			>
-				<Button
-					colorScheme="teal"
-					mr={4}
-				>
-					<Link href="/">Home</Link>
-				</Button>
+	const [{ data, fetching }] = useMeQuery();
+
+	let body = null;
+
+	if (fetching) {
+		// data is loading
+	} else if (!data?.me) {
+		// user not logged in
+		body = (
+			<>
 				<Button
 					colorScheme="teal"
 					mr={4}
@@ -32,7 +25,30 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 				<Button colorScheme="teal">
 					<Link href="/register">Register</Link>
 				</Button>
-			</Box>
+			</>
+		);
+	} else {
+		// user is logged in
+		body = (
+			<Flex>
+				<Box mr={4}>{data.me.username}</Box>
+				<Button variant="link">Logout</Button>
+			</Flex>
+		);
+		console.log("====================================");
+		console.log(data);
+		console.log("====================================");
+	}
+
+	return (
+		<Flex
+			w="100%"
+			p={4}
+			color="white"
+			bg="tomato"
+			ml={"auto"}
+		>
+			{body}
 		</Flex>
 	);
 };
