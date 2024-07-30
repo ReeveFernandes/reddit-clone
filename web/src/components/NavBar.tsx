@@ -7,6 +7,7 @@ interface NavBarProps {}
 
 export const NavBar: React.FC<NavBarProps> = ({}) => {
 	const [{ data, fetching }] = useMeQuery();
+	console.log(data);
 
 	let body = null;
 
