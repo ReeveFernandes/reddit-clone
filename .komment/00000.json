@@ -842,5 +842,50 @@
         ]
       }
     }
+  },
+  {
+    "name": "NavBar.tsx",
+    "path": "web/src/components/NavBar.tsx",
+    "content": {
+      "structured": {
+        "description": "A reusable React component named `NavBar`. It uses Chakra UI and Next.js Link components to render a navigation bar that displays either login/register buttons for unauthenticated users or username and logout button for authenticated users. The component fetches user data using GraphQL's `useMeQuery` hook.",
+        "items": [
+          {
+            "id": "5cf95a79-1f48-549a-7041-2686d2ac2bc7",
+            "ancestors": [],
+            "description": "Renders a navigation bar with login/register buttons when not logged in and displays the user's username and a logout button when logged in. It fetches user data using the `useMeQuery` hook and updates the UI accordingly.",
+            "params": [
+              {
+                "name": "obj",
+                "default_value": null,
+                "optional": false,
+                "type_name": "object",
+                "description": "Destructured into two properties, `data` and `fetching`, from the result of the `useMeQuery` hook. The hook returns an array with these two properties."
+              }
+            ],
+            "returns": {
+              "type_name": "React.ReactElement",
+              "description": "A JSX element consisting of a Flex container that contains either login/registration buttons if the user is not logged in, or the username and a logout button if the user is logged in."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "<NavBar />\n",
+              "description": ""
+            },
+            "name": "NavBar",
+            "location": {
+              "start": 8,
+              "insert": 8,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 48,
+            "docLength": null
+          }
+        ]
+      }
+    }
   }
 ]
